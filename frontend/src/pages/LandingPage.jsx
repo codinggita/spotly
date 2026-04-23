@@ -5,6 +5,7 @@ import FeaturesSection from '../components/home/FeaturesSection';
 import HowItWorksSection from '../components/home/HowItWorksSection';
 import CTASection from '../components/home/CTASection';
 import AdvantagesSection from '../components/home/AdvantagesSection';
+import Footer from '../components/layout/Footer';
 
 const LandingPage = () => {
   return (
@@ -17,6 +18,7 @@ const LandingPage = () => {
         <CTASection />
         <AdvantagesSection />
       </main>
+      <Footer />
     </div>
   );
 };
