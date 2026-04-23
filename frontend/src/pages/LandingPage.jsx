@@ -3,6 +3,8 @@ import Navbar from '../components/layout/Navbar';
 import HeroSection from '../components/home/HeroSection';
 import FeaturesSection from '../components/home/FeaturesSection';
 import HowItWorksSection from '../components/home/HowItWorksSection';
+import CTASection from '../components/home/CTASection';
+import AdvantagesSection from '../components/home/AdvantagesSection';
 
 const LandingPage = () => {
   return (
@@ -12,6 +14,8 @@ const LandingPage = () => {
         <HeroSection />
         <FeaturesSection />
         <HowItWorksSection />
+        <CTASection />
+        <AdvantagesSection />
       </main>
     </div>
   );
