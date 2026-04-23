@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import LandingPage from '../pages/LandingPage';
+import HostPage from '../pages/HostPage';
 
 // Placeholder components
 const Login = () => <div className="p-10 text-center">Login Page</div>;
@@ -10,6 +11,7 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
+      <Route path="/host" element={<HostPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/driver" element={<DriverDashboard />} />
       <Route path="/owner" element={<OwnerDashboard />} />
