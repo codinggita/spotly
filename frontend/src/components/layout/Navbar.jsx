@@ -1,7 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
+  const location = useLocation();
+  const path = location.pathname;
+
   return (
     <header className="bg-white sticky top-0 z-50 px-6 py-4 border-b border-gray-100">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -14,13 +17,28 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8">
-          <Link to="#" className="text-[#0047FF] border-b-2 border-[#0047FF] pb-1 font-medium text-sm">
+          <Link 
+            to="/" 
+            className={`pb-1 font-medium text-sm transition-colors ${
+              path === '/' ? 'text-[#0047FF] border-b-2 border-[#0047FF]' : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
             Find Parking
           </Link>
-          <Link to="#" className="text-gray-600 hover:text-gray-900 pb-1 font-medium text-sm transition-colors">
+          <Link 
+            to="/host" 
+            className={`pb-1 font-medium text-sm transition-colors ${
+              path === '/host' ? 'text-[#0047FF] border-b-2 border-[#0047FF]' : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
             List Your Spot
           </Link>
-          <Link to="#" className="text-gray-600 hover:text-gray-900 pb-1 font-medium text-sm transition-colors">
+          <Link 
+            to="/how-it-works" 
+            className={`pb-1 font-medium text-sm transition-colors ${
+              path === '/how-it-works' ? 'text-[#0047FF] border-b-2 border-[#0047FF]' : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
             How It Works
           </Link>
           <Link to="#" className="text-gray-600 hover:text-gray-900 pb-1 font-medium text-sm transition-colors">
