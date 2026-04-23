@@ -3,6 +3,8 @@ import Navbar from '../components/layout/Navbar';
 import HostHeroSection from '../components/host/HostHeroSection';
 import HostBenefitsSection from '../components/host/HostBenefitsSection';
 import TestimonialsSection from '../components/host/TestimonialsSection';
+import HostCTASection from '../components/host/HostCTASection';
+import Footer from '../components/layout/Footer';
 
 const HostPage = () => {
   return (
@@ -12,7 +14,9 @@ const HostPage = () => {
         <HostHeroSection />
         <HostBenefitsSection />
         <TestimonialsSection />
+        <HostCTASection />
       </main>
+      <Footer />
     </div>
   );
 };
