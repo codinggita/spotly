@@ -3,6 +3,7 @@ import LandingPage from '../pages/LandingPage';
 import HostPage from '../pages/HostPage';
 import HowItWorksPage from '../pages/HowItWorksPage';
 import PricingPage from '../pages/PricingPage';
+import SelectionPage from '../pages/SelectionPage';
 
 // Placeholder components
 const Login = () => <div className="p-10 text-center">Login Page</div>;
@@ -11,15 +12,18 @@ const OwnerDashboard = () => <div className="p-10 text-center">Owner Dashboard</
 
 const AppRoutes = () => {
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/host" element={<HostPage />} />
-      <Route path="/how-it-works" element={<HowItWorksPage />} />
-      <Route path="/pricing" element={<PricingPage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/driver" element={<DriverDashboard />} />
-      <Route path="/owner" element={<OwnerDashboard />} />
-    </Routes>
+    <div className="min-h-screen bg-gray-50">
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/host" element={<HostPage />} />
+        <Route path="/how-it-works" element={<HowItWorksPage />} />
+        <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/register" element={<SelectionPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/driver" element={<DriverDashboard />} />
+        <Route path="/owner" element={<OwnerDashboard />} />
+      </Routes>
+    </div>
   );
 };
 
