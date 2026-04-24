@@ -1,12 +1,33 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { loginUser } from '../services/authService';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import { Mail, Lock, Eye, EyeOff, LayoutDashboard } from 'lucide-react';
 import SocialAuth from '../components/auth/SocialAuth';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      const data = await loginUser(email, password);
+      // Redirect based on role
+      navigate(data.user.role === 'driver' ? '/driver' : '/owner');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
@@ -32,17 +53,24 @@ const LoginPage = () => {
 
           <div className="space-y-6">
             {/* Social Auth */}
-            <SocialAuth mode="SIGN IN" />
+            {error && (
+              <div className="p-3 bg-red-50 text-red-500 text-sm rounded-xl border border-red-100 font-medium animate-shake">
+                {error}
+              </div>
+            )}
 
             {/* Email Form */}
-            <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-5" onSubmit={handleSubmit}>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
                 <div className="relative">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input 
                     type="email" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@company.com"
+                    required
                     className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
                   />
                 </div>
@@ -59,7 +87,10 @@ const LoginPage = () => {
                   <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input 
                     type={showPassword ? "text" : "password"} 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
+                    required
                     className="w-full pl-12 pr-12 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
                   />
                   <button 
@@ -72,8 +103,11 @@ const LoginPage = () => {
                 </div>
               </div>
 
-              <button className="w-full bg-[#0047FF] hover:bg-blue-700 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-blue-500/20 transition-all active:scale-[0.98] mt-4">
-                Sign In
+              <button 
+                disabled={loading}
+                className="w-full bg-[#0047FF] hover:bg-blue-700 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-blue-500/20 transition-all active:scale-[0.98] mt-4 disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {loading ? 'Signing in...' : 'Sign In'}
               </button>
             </form>
 
