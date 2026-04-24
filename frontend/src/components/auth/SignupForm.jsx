@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SocialAuth from './SocialAuth';
 
@@ -12,6 +12,18 @@ const SignupForm = () => {
       <SocialAuth mode="SIGN UP" />
 
       <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
+          <div className="relative">
+            <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <input 
+              type="text" 
+              placeholder="John Doe"
+              className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
+            />
+          </div>
+        </div>
+
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
           <div className="relative">
