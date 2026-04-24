@@ -5,7 +5,7 @@ const AuthLeftPanel = () => {
     <div className="h-full w-full relative bg-[#0047FF] overflow-hidden flex flex-col justify-center px-12 lg:px-20">
       {/* Background Overlay Pattern/Image */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0036CC] to-[#0047FF] opacity-90"></div>
-      <div className="absolute inset-0 opacity-20 bg-[url('https://i.pinimg.com/1200x/bf/b4/47/bfb447bf3bf8ea25b0d8a9ded8332ca8.jpg')] bg-cover bg-center mix-blend-overlay"></div>
+      <div className="absolute inset-0 opacity-100 bg-[url('https://i.pinimg.com/1200x/bf/b4/47/bfb447bf3bf8ea25b0d8a9ded8332ca8.jpg')] bg-cover bg-center mix-blend-overlay"></div>
 
       <div className="relative z-10 max-w-lg">
         <h2 className="text-4xl font-bold text-white mb-6">Spotly</h2>
