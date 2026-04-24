@@ -1,8 +1,6 @@
 import React from 'react';
 import AuthLeftPanel from '../components/auth/AuthLeftPanel';
 import SignupForm from '../components/auth/SignupForm';
-import Footer from '../components/layout/Footer';
-
 const DriverSignupPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -22,8 +20,6 @@ const DriverSignupPage = () => {
           </div>
         </div>
       </div>
-      
-      <Footer />
     </div>
   );
 };
