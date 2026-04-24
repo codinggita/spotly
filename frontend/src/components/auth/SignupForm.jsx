@@ -8,10 +8,10 @@ const SignupForm = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <SocialAuth mode="SIGN UP" />
 
-      <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+      <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
           <div className="relative">
@@ -19,7 +19,7 @@ const SignupForm = () => {
             <input 
               type="text" 
               placeholder="John Doe"
-              className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
+              className="w-full pl-12 pr-4 py-2.5 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
             />
           </div>
         </div>
@@ -31,7 +31,7 @@ const SignupForm = () => {
             <input 
               type="email" 
               placeholder="name@example.com"
-              className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
+              className="w-full pl-12 pr-4 py-2.5 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
             />
           </div>
         </div>
@@ -43,7 +43,7 @@ const SignupForm = () => {
             <input 
               type={showPassword ? "text" : "password"} 
               placeholder="••••••••"
-              className="w-full pl-12 pr-12 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
+              className="w-full pl-12 pr-12 py-2.5 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
             />
             <button 
               type="button"
@@ -62,7 +62,7 @@ const SignupForm = () => {
             <input 
               type={showConfirmPassword ? "text" : "password"} 
               placeholder="••••••••"
-              className="w-full pl-12 pr-12 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
+              className="w-full pl-12 pr-12 py-2.5 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
             />
             <button 
               type="button"
@@ -74,11 +74,11 @@ const SignupForm = () => {
           </div>
         </div>
 
-        <button className="w-full bg-[#0047FF] hover:bg-blue-700 text-white py-4 rounded-xl font-bold shadow-lg shadow-blue-500/20 transition-all active:scale-[0.98] mt-2">
+        <button className="w-full bg-[#0047FF] hover:bg-blue-700 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-blue-500/20 transition-all active:scale-[0.98] mt-2">
           Sign Up
         </button>
 
-        <p className="text-center text-gray-500 text-sm mt-8">
+        <p className="text-center text-gray-500 text-sm mt-4">
           Already have an account?{' '}
           <Link to="/login" className="text-[#0047FF] font-bold hover:underline">Sign In</Link>
         </p>
