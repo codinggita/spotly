@@ -56,9 +56,12 @@ const Navbar = ({ authMode = false, rightText, rightLink }) => {
         {/* Actions */}
         <div className="hidden md:flex items-center space-x-6">
           {authMode ? (
-            rightText ? (
-              <Link to={rightLink || "/"} className="text-[#64748B] hover:text-[#1E293B] font-bold text-sm transition-colors">
-                {rightText}
+            path === '/login' ? (
+              <Link
+                to="/register"
+                className="bg-[#0047FF] hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium text-sm transition-colors"
+              >
+                Sign Up
               </Link>
             ) : (
               <Link
