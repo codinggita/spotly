@@ -1,34 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Compass } from 'lucide-react';
 import ParkingCard, { DashboardNavbar } from '../components/dashboard/DashboardComponents';
+import ParkingMap from '../components/dashboard/ParkingMap';
+import { getParkingSpots } from '../services/parkingService';
+import Footer from '../components/layout/Footer';
 
 const DriverDashboard = () => {
-  const parkingSpots = [
-    {
-      image: "https://images.unsplash.com/photo-1506521781263-d8422e82f27a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      title: "Grand Plaza Underground",
-      address: "450 Market St, Financial District",
-      price: 6.50,
-      slots: 4,
-      isPaid: true
-    },
-    {
-      image: "https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      title: "City Park Surface Lot",
-      address: "822 Mission St, SoMa",
-      price: 0.00,
-      slots: 15,
-      isPaid: false
-    },
-    {
-      image: "https://images.unsplash.com/photo-1532054231014-63309a96e959?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      title: "Nexus Smart Garage",
-      address: "112 Embarcadero, Waterfront",
-      price: 8.25,
-      slots: 1,
-      isPaid: true
-    }
-  ];
+  const [parkingSpots, setParkingSpots] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState('all'); // 'all', 'paid', 'free'
+
+  useEffect(() => {
+    const fetchSpots = async () => {
+      try {
+        const data = await getParkingSpots();
+        console.log('--- REAL DATABASE DATA ---');
+        console.log(data);
+        console.log('--------------------------');
+        setParkingSpots(data);
+      } catch (err) {
+        console.error('Failed to load parking spots');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSpots();
+  }, []);
+
+  const filteredSpots = parkingSpots.filter(spot => {
+    if (filter === 'all') return true;
+    return spot.type?.toLowerCase() === filter.toLowerCase();
+  });
 
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
@@ -53,50 +55,60 @@ const DriverDashboard = () => {
             </div>
             
             <div className="flex bg-white p-1.5 rounded-2xl border border-gray-100 shadow-sm">
-              <button className="px-5 py-2 bg-[#0047FF] text-white rounded-xl text-sm font-bold shadow-lg shadow-blue-500/20">All</button>
-              <button className="px-5 py-2 text-gray-500 hover:text-gray-900 rounded-xl text-sm font-bold transition-colors">Paid</button>
-              <button className="px-5 py-2 text-gray-500 hover:text-gray-900 rounded-xl text-sm font-bold transition-colors">Free</button>
+              <button 
+                onClick={() => setFilter('all')}
+                className={`px-5 py-2 rounded-xl text-sm font-bold transition-all ${filter === 'all' ? 'bg-[#0047FF] text-white shadow-lg shadow-blue-500/20' : 'text-gray-500 hover:text-gray-900'}`}
+              >
+                All
+              </button>
+              <button 
+                onClick={() => setFilter('paid')}
+                className={`px-5 py-2 rounded-xl text-sm font-bold transition-all ${filter === 'paid' ? 'bg-[#0047FF] text-white shadow-lg shadow-blue-500/20' : 'text-gray-500 hover:text-gray-900'}`}
+              >
+                Paid
+              </button>
+              <button 
+                onClick={() => setFilter('free')}
+                className={`px-5 py-2 rounded-xl text-sm font-bold transition-all ${filter === 'free' ? 'bg-[#0047FF] text-white shadow-lg shadow-blue-500/20' : 'text-gray-500 hover:text-gray-900'}`}
+              >
+                Free
+              </button>
             </div>
           </div>
         </div>
 
         {/* Map Section */}
-        <div className="relative h-[450px] rounded-[2.5rem] overflow-hidden mb-12 border border-gray-100 shadow-xl shadow-gray-200/50">
-          <img 
-            src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" 
-            alt="Map" 
-            className="w-full h-full object-cover grayscale opacity-80"
-          />
-          {/* Map Overlay Elements */}
-          <div className="absolute inset-0 bg-blue-500/5" />
-          
-          {/* Live View Badge */}
-          <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-xl p-4 rounded-3xl border border-white shadow-2xl">
-            <div className="font-bold text-[#1E293B] mb-0.5">Live View</div>
-            <div className="text-xs text-gray-500 font-medium">32 spots available nearby</div>
-          </div>
-          
-          {/* Map Pins */}
-          <div className="absolute top-1/3 left-1/4 bg-[#0047FF] text-white px-3 py-1.5 rounded-xl font-bold text-xs shadow-lg transform -translate-x-1/2 -translate-y-1/2 cursor-pointer hover:scale-110 transition-transform">
-            $4.50
-          </div>
-          <div className="absolute bottom-1/3 right-1/4 bg-[#10B981] text-white px-3 py-1.5 rounded-xl font-bold text-xs shadow-lg transform -translate-x-1/2 -translate-y-1/2 cursor-pointer hover:scale-110 transition-transform uppercase">
-            Free
-          </div>
-          
-          {/* Re-center button */}
-          <button className="absolute top-6 right-6 p-4 bg-white/90 backdrop-blur-xl rounded-full border border-white shadow-2xl text-[#0047FF] hover:bg-white transition-all active:scale-95">
-            <Compass className="w-6 h-6" />
-          </button>
+        <div className="relative h-[500px] rounded-[2.5rem] overflow-hidden mb-12 border border-white shadow-2xl shadow-blue-500/10">
+          <ParkingMap />
         </div>
 
         {/* Parking Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {parkingSpots.map((spot, index) => (
-            <ParkingCard key={index} {...spot} />
-          ))}
+          {loading ? (
+            [1, 2, 3].map((i) => (
+              <div key={i} className="h-80 bg-white rounded-[2rem] animate-pulse border border-gray-100" />
+            ))
+          ) : filteredSpots.length > 0 ? (
+            filteredSpots.map((spot, index) => (
+              <ParkingCard 
+                key={index} 
+                id={spot._id || spot.id}
+                image={spot.image || spot.img_url || "https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=800&q=80"}
+                title={spot.name || spot.title}
+                address={spot.address}
+                price={spot.price_per_hour}
+                slots={spot.slots_left}
+                isPaid={spot.type === 'PAID'}
+              />
+            ))
+          ) : (
+            <div className="col-span-full text-center py-20">
+              <p className="text-gray-500 font-medium">No {filter !== 'all' ? filter : ''} parking spots found.</p>
+            </div>
+          )}
         </div>
       </main>
+      <Footer />
     </div>
   );
 };

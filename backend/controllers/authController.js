@@ -61,7 +61,7 @@ exports.login = async (req, res) => {
 };
 
 // Get token from model, create cookie and send response
-const sendTokenResponse = (user, statusCode, res) => {
+function sendTokenResponse(user, statusCode, res) {
   // Create token
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: '30d'
@@ -77,4 +77,4 @@ const sendTokenResponse = (user, statusCode, res) => {
       role: user.role
     }
   });
-};
+}

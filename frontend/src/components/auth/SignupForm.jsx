@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import SocialAuth from './SocialAuth';
 import { registerUser } from '../../services/authService';

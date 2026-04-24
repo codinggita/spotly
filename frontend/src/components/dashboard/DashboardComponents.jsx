@@ -1,5 +1,6 @@
 import React from 'react';
 import { Search, MapPin, Bell, MessageSquare, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const DashboardNavbar = () => {
   return (
@@ -34,14 +35,14 @@ const DashboardNavbar = () => {
   );
 };
 
-const ParkingCard = ({ image, title, address, price, slots, isPaid }) => {
+const ParkingCard = ({ id, image, title, address, price, slots, isPaid }) => {
   return (
     <div className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-blue-500/5 transition-all group">
       <div className="relative h-48">
         <img src={image} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
         <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
-          <div className={`w-1.5 h-1.5 rounded-full ${slots < 5 ? 'bg-red-500 animate-pulse' : 'bg-green-500'}`} />
-          {slots} slots left
+          <div className={`w-1.5 h-1.5 rounded-full ${(slots || 0) < 5 ? 'bg-red-500 animate-pulse' : 'bg-green-500'}`} />
+          {slots || 0} slots left
         </div>
       </div>
       
@@ -60,12 +61,17 @@ const ParkingCard = ({ image, title, address, price, slots, isPaid }) => {
         
         <div className="flex items-center justify-between pt-4 border-t border-gray-50">
           <div>
-            <span className="text-xl font-bold text-[#1E293B]">${price.toFixed(2)}</span>
+            <span className="text-xl font-bold text-[#1E293B]">
+              ${(typeof price === 'number' ? price : 0).toFixed(2)}
+            </span>
             <span className="text-xs text-gray-400 font-medium ml-1">/hour</span>
           </div>
-          <button className="bg-[#0047FF] hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg shadow-blue-500/10 active:scale-[0.98]">
+          <Link 
+            to={`/parking/${id}`}
+            className="bg-[#0047FF] hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg shadow-blue-500/10 active:scale-[0.98]"
+          >
             View Details
-          </button>
+          </Link>
         </div>
       </div>
     </div>
