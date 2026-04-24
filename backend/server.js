@@ -17,6 +17,9 @@ app.use(express.json());
 // Enable CORS
 app.use(cors());
 
+// Mount routers
+app.use('/api/auth', require('./routes/authRoutes'));
+
 // Basic route
 app.get('/', (req, res) => {
   res.json({ message: 'Spotly API is running...' });
