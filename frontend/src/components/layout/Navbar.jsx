@@ -41,7 +41,12 @@ const Navbar = () => {
           >
             How It Works
           </Link>
-          <Link to="#" className="text-gray-600 hover:text-gray-900 pb-1 font-medium text-sm transition-colors">
+          <Link 
+            to="/pricing" 
+            className={`pb-1 font-medium text-sm transition-colors ${
+              path === '/pricing' ? 'text-[#0047FF] border-b-2 border-[#0047FF]' : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
             Pricing
           </Link>
         </nav>

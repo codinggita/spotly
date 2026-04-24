@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import LandingPage from '../pages/LandingPage';
 import HostPage from '../pages/HostPage';
 import HowItWorksPage from '../pages/HowItWorksPage';
+import PricingPage from '../pages/PricingPage';
 
 // Placeholder components
 const Login = () => <div className="p-10 text-center">Login Page</div>;
@@ -14,6 +15,7 @@ const AppRoutes = () => {
       <Route path="/" element={<LandingPage />} />
       <Route path="/host" element={<HostPage />} />
       <Route path="/how-it-works" element={<HowItWorksPage />} />
+      <Route path="/pricing" element={<PricingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/driver" element={<DriverDashboard />} />
       <Route path="/owner" element={<OwnerDashboard />} />
