@@ -2,9 +2,9 @@ import React from 'react';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import PricingHero from '../components/pricing/PricingHero';
-// import PricingPlans from '../components/pricing/PricingPlans';
-// import PricingGuarantee from '../components/pricing/PricingGuarantee';
-// import PricingFAQ from '../components/pricing/PricingFAQ';
+import PricingPlans from '../components/pricing/PricingPlans';
+import PricingGuarantee from '../components/pricing/PricingGuarantee';
+import PricingFAQ from '../components/pricing/PricingFAQ';
 
 const PricingPage = () => {
   return (
@@ -12,7 +12,9 @@ const PricingPage = () => {
       <Navbar />
       <main>
         <PricingHero />
-        {/* PricingPlans, PricingGuarantee, and PricingFAQ will be added in Part 2 */}
+        <PricingPlans />
+        <PricingGuarantee />
+        <PricingFAQ />
       </main>
       <Footer />
     </div>
