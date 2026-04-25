@@ -1,18 +1,32 @@
 import React from 'react';
 import { Search, MapPin, Bell, MessageSquare, User } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const DashboardNavbar = () => {
+  const location = useLocation();
+  const isBookingsPage = location.pathname === '/bookings';
+  const isReportsPage = location.pathname === '/reports';
+
   return (
     <nav className="bg-white border-b border-gray-100 px-6 py-3 flex items-center justify-between sticky top-0 z-50">
-      <div className="flex items-center gap-2">
+      <Link to="/driver" className="flex items-center gap-2">
         <span className="text-2xl font-extrabold text-[#0047FF]">Spotly</span>
-      </div>
+      </Link>
       
       <div className="flex items-center gap-8">
         <div className="hidden md:flex items-center gap-6 text-sm font-bold text-[#1E293B]">
-          <button className="hover:text-[#0047FF] transition-colors">Bookings</button>
-          <button className="hover:text-[#0047FF] transition-colors">Reports</button>
+          <Link 
+            to="/bookings" 
+            className={`transition-all pb-1 ${isBookingsPage ? 'text-[#0047FF] border-b-2 border-[#0047FF]' : 'text-gray-500 hover:text-[#0047FF]'}`}
+          >
+            Bookings
+          </Link>
+          <Link 
+            to="/reports" 
+            className={`transition-all pb-1 ${isReportsPage ? 'text-[#0047FF] border-b-2 border-[#0047FF]' : 'text-gray-500 hover:text-[#0047FF]'}`}
+          >
+            Reports
+          </Link>
         </div>
         
         <div className="flex items-center gap-4">
