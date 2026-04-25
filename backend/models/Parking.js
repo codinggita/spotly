@@ -23,7 +23,7 @@ const ParkingSchema = new mongoose.Schema({
       index: '2dsphere' // For proximity searches
     }
   },
-  pricePerHour: {
+  price_per_hour: {
     type: Number,
     required: true
   },
@@ -31,7 +31,7 @@ const ParkingSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  availableSlots: {
+  slots_left: {
     type: Number,
     required: true
   },

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ParkingMap = () => {
+const ParkingMap = ({ searchQuery }) => {
   const [location, setLocation] = useState({ lat: 37.7749, lng: -122.4194 }); // Default to SF
   const [loading, setLoading] = useState(true);
 
@@ -24,11 +24,14 @@ const ParkingMap = () => {
   }, []);
 
   // Construct the Google Maps Embed URL dynamically
-  const googleMapsUrl = `https://www.google.com/maps?q=${location.lat},${location.lng}&z=15&output=embed`;
+  // If searchQuery exists, use it. Otherwise, use current location coordinates.
+  const googleMapsUrl = searchQuery 
+    ? `https://www.google.com/maps?q=${encodeURIComponent(searchQuery)}&z=15&output=embed`
+    : `https://www.google.com/maps?q=${location.lat},${location.lng}&z=15&output=embed`;
 
   return (
     <div className="h-full w-full relative bg-gray-100 flex items-center justify-center overflow-hidden">
-      {loading ? (
+      {loading && !searchQuery ? (
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-[#0047FF] border-t-transparent rounded-full animate-spin"></div>
           <p className="text-gray-500 font-medium">Locating you on Google Maps...</p>
@@ -53,7 +56,9 @@ const ParkingMap = () => {
           <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
           <div className="font-bold text-[#1E293B]">Google Live View</div>
         </div>
-        <div className="text-xs text-gray-500 font-medium">Showing spots near your current position</div>
+        <div className="text-xs text-gray-500 font-medium">
+          {searchQuery ? `Showing results for "${searchQuery}"` : "Showing spots near your current position"}
+        </div>
       </div>
     </div>
   );

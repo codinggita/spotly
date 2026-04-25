@@ -62,7 +62,7 @@ const HeroSection = () => {
 
               {/* Floating Price Tags */}
               <div className="absolute top-1/3 left-1/4 bg-[#0047FF] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg transform -rotate-6">
-                $4.50
+                ₹4.50
               </div>
               
               <div className="absolute bottom-1/3 right-1/4 bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg transform rotate-6">

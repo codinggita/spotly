@@ -70,7 +70,7 @@ const OwnerSignupPage = () => {
               <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Active Owners</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-[#1E293B]">$2.4M</div>
+              <div className="text-2xl font-bold text-[#1E293B]">₹2.4M</div>
               <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Paid to Partners</div>
             </div>
             <div>

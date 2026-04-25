@@ -95,7 +95,7 @@ const HostHeroSection = () => {
                     <p className="text-sm font-semibold text-gray-900">Estimated Monthly Earnings</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-3xl font-bold text-[#0047FF]">${minEarnings} - ${maxEarnings}</p>
+                    <p className="text-3xl font-bold text-[#0047FF]">₹{minEarnings} - ₹{maxEarnings}</p>
                     <p className="text-xs text-gray-400">*Based on average rates in your area</p>
                   </div>
                 </div>

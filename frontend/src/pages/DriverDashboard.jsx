@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Compass } from 'lucide-react';
+import { Search, Compass, MapPin } from 'lucide-react';
 import ParkingCard, { DashboardNavbar } from '../components/dashboard/DashboardComponents';
 import ParkingMap from '../components/dashboard/ParkingMap';
 import { getParkingSpots } from '../services/parkingService';
@@ -9,6 +9,10 @@ const DriverDashboard = () => {
   const [parkingSpots, setParkingSpots] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all'); // 'all', 'paid', 'free'
+  const [searchInput, setSearchInput] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [mapQuery, setMapQuery] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   useEffect(() => {
     const fetchSpots = async () => {
@@ -27,9 +31,47 @@ const DriverDashboard = () => {
     fetchSpots();
   }, []);
 
+  // Fetch suggestions from Nominatim API (OpenStreetMap)
+  useEffect(() => {
+    if (searchInput.length < 3) {
+      setSuggestions([]);
+      return;
+    }
+
+    const timer = setTimeout(async () => {
+      try {
+        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchInput)}&addressdetails=1&limit=5`);
+        const data = await response.json();
+        setSuggestions(data);
+      } catch (err) {
+        console.error('Error fetching suggestions:', err);
+      }
+    }, 500); // Debounce for 500ms
+
+    return () => clearTimeout(timer);
+  }, [searchInput]);
+
+  const handleSelectSuggestion = (suggestion) => {
+    const address = suggestion.display_name;
+    setSearchInput(address);
+    setMapQuery(address);
+    setSuggestions([]);
+    setShowSuggestions(false);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      setMapQuery(searchInput);
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
+  };
+
   const filteredSpots = parkingSpots.filter(spot => {
     if (filter === 'all') return true;
-    return spot.type?.toLowerCase() === filter.toLowerCase();
+    if (filter === 'free') return parseFloat(spot.price_per_hour) === 0;
+    if (filter === 'paid') return parseFloat(spot.price_per_hour) > 0;
+    return true;
   });
 
   return (
@@ -49,9 +91,39 @@ const DriverDashboard = () => {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
               <input 
                 type="text" 
-                placeholder="Search location..."
+                placeholder="Search location (e.g. Ahmedabad, NY, etc.)"
+                value={searchInput}
+                onChange={(e) => {
+                  setSearchInput(e.target.value);
+                  setShowSuggestions(true);
+                }}
+                onKeyDown={handleKeyDown}
+                onFocus={() => setShowSuggestions(true)}
                 className="w-full pl-12 pr-4 py-3 bg-white border border-gray-100 rounded-2xl shadow-sm focus:ring-2 focus:ring-blue-500/10 focus:border-[#0047FF] outline-none transition-all"
               />
+              
+              {/* Suggestions Dropdown */}
+              {showSuggestions && suggestions.length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-[100]">
+                  {suggestions.map((item, i) => (
+                    <button
+                      key={i}
+                      onClick={() => handleSelectSuggestion(item)}
+                      className="w-full px-5 py-4 text-left hover:bg-blue-50 transition-colors border-b last:border-0 border-gray-50 flex items-start gap-3 group"
+                    >
+                      <MapPin className="w-5 h-5 text-gray-400 mt-0.5 group-hover:text-blue-600" />
+                      <div>
+                        <div className="text-sm font-bold text-[#1E293B] group-hover:text-blue-600 transition-colors">
+                          {item.display_name.split(',')[0]}
+                        </div>
+                        <div className="text-[10px] text-gray-400 font-medium truncate max-w-[240px]">
+                          {item.display_name.split(',').slice(1).join(',')}
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
             
             <div className="flex bg-white p-1.5 rounded-2xl border border-gray-100 shadow-sm">
@@ -79,7 +151,7 @@ const DriverDashboard = () => {
 
         {/* Map Section */}
         <div className="relative h-[500px] rounded-[2.5rem] overflow-hidden mb-12 border border-white shadow-2xl shadow-blue-500/10">
-          <ParkingMap />
+          <ParkingMap searchQuery={mapQuery} />
         </div>
 
         {/* Parking Grid */}
@@ -98,7 +170,7 @@ const DriverDashboard = () => {
                 address={spot.address}
                 price={spot.price_per_hour}
                 slots={spot.slots_left}
-                isPaid={spot.type === 'PAID'}
+                isPaid={parseFloat(spot.price_per_hour) > 0}
               />
             ))
           ) : (

@@ -29,7 +29,7 @@ const PricingPlans = () => {
         "Free professional listing",
         "Smart pricing tools",
         "Automated monthly payouts",
-        "$1M Liability coverage"
+        "₹1M Liability coverage"
       ],
       buttonText: "List Your Spot",
       buttonColor: "bg-[#D34500] hover:bg-orange-700",

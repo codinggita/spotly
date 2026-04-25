@@ -19,7 +19,7 @@ const HostBenefitsSection = () => {
       id: 3,
       icon: <ShieldCheck className="w-5 h-5 text-[#0047FF]" />,
       title: 'Verified Drivers',
-      description: 'Every driver is identity-verified. Plus, our $1M protection plan covers your property on every booking.'
+      description: 'Every driver is identity-verified. Plus, our ₹1M protection plan covers your property on every booking.'
     }
   ];
 

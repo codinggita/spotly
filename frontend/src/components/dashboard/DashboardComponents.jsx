@@ -62,7 +62,7 @@ const ParkingCard = ({ id, image, title, address, price, slots, isPaid }) => {
         <div className="flex items-center justify-between pt-4 border-t border-gray-50">
           <div>
             <span className="text-xl font-bold text-[#1E293B]">
-              ${(typeof price === 'number' ? price : 0).toFixed(2)}
+              ₹{(typeof price === 'number' ? price : 0).toFixed(2)}
             </span>
             <span className="text-xs text-gray-400 font-medium ml-1">/hour</span>
           </div>

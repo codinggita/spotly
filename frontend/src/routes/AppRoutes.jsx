@@ -9,6 +9,8 @@ import OwnerSignupPage from '../pages/OwnerSignupPage';
 import LoginPage from '../pages/LoginPage';
 import DriverDashboard from '../pages/DriverDashboard';
 import ParkingDetailsPage from '../pages/ParkingDetailsPage';
+import CheckoutPage from '../pages/CheckoutPage';
+
 
 // Placeholder components
 const OwnerDashboard = () => <div className="p-10 text-center">Owner Dashboard</div>;
@@ -28,7 +30,9 @@ const AppRoutes = () => {
         <Route path="/driver" element={<DriverDashboard />} />
         <Route path="/owner" element={<OwnerDashboard />} />
         <Route path="/parking/:id" element={<ParkingDetailsPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
+
     </div>
   );
 };

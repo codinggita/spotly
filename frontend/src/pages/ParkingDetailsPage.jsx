@@ -48,7 +48,7 @@ const ParkingDetailsPage = () => {
 
   if (loading) return <div className="h-screen flex items-center justify-center font-bold text-blue-600">Loading...</div>;
 
-  const hourlyRate = parkingSpot?.price_per_hour || 8.50;
+  const hourlyRate = parkingSpot?.price_per_hour !== undefined ? parkingSpot.price_per_hour : 8.50;
   const totalAmount = (hourlyRate * duration).toFixed(2);
 
   return (
@@ -96,7 +96,7 @@ const ParkingDetailsPage = () => {
               {[
                 { label: 'Total Capacity', value: parkingSpot?.totalSlots || 120 },
                 { label: 'Available Now', value: parkingSpot?.slots_left || 42, color: 'text-blue-600' },
-                { label: 'Hourly Rate', value: `$${hourlyRate.toFixed(2)}` }
+                { label: 'Hourly Rate', value: `₹${hourlyRate.toFixed(2)}` }
               ].map((stat, i) => (
                 <div key={i} className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm text-center">
                   <div className="text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">{stat.label}</div>
@@ -195,10 +195,18 @@ const ParkingDetailsPage = () => {
                   <span className="text-sm font-black text-[#1E293B]">4 mins</span>
                 </div>
               </div>
-              <button className="w-full py-4 border-2 border-blue-600 text-blue-600 rounded-2xl font-black flex items-center justify-center gap-2 hover:bg-blue-50 transition-colors">
+              <button 
+                onClick={() => {
+                  const address = parkingSpot?.address || "452 Waterfront Way, San Francisco, CA 94105";
+                  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+                  window.open(googleMapsUrl, '_blank');
+                }}
+                className="w-full py-4 border-2 border-blue-600 text-blue-600 rounded-2xl font-black flex items-center justify-center gap-2 hover:bg-blue-50 transition-colors"
+              >
                 <Navigation className="w-5 h-5" />
                 Open in Maps
               </button>
+
             </div>
 
             {/* Booking Summary Box */}
@@ -241,12 +249,24 @@ const ParkingDetailsPage = () => {
 
                <div className="flex justify-between items-end mb-10 relative z-10">
                  <div className="text-2xl font-black">Total</div>
-                 <div className="text-5xl font-black tracking-tighter">${totalAmount}</div>
+                 <div className="text-5xl font-black tracking-tighter">₹{totalAmount}</div>
                </div>
 
-               <button className="w-full py-5 bg-white text-[#0047FF] rounded-2xl font-black shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all relative z-10">
+               <button 
+                onClick={() => navigate('/checkout', { 
+                  state: { 
+                    parkingSpot, 
+                    selectedSlot, 
+                    duration, 
+                    totalAmount,
+                    type: parkingSpot?.type || 'Standard EV'
+                  } 
+                })}
+                className="w-full py-5 bg-white text-[#0047FF] rounded-2xl font-black shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all relative z-10"
+               >
                  Confirm & Pay Now
                </button>
+
             </div>
 
             {/* Amenities Box */}
