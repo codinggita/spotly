@@ -12,6 +12,9 @@ import ParkingDetailsPage from '../pages/ParkingDetailsPage';
 import CheckoutPage from '../pages/CheckoutPage';
 import BookingDetailsPage from '../pages/BookingDetailsPage';
 import ReportsPage from '../pages/ReportsPage';
+import NotificationsPage from '../pages/NotificationsPage';
+import MessagesPage from '../pages/MessagesPage';
+import ProfilePage from '../pages/ProfilePage';
 
 
 // Placeholder components
@@ -35,6 +38,9 @@ const AppRoutes = () => {
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/bookings" element={<BookingDetailsPage />} />
         <Route path="/reports" element={<ReportsPage />} />
+        <Route path="/notifications" element={<NotificationsPage />} />
+        <Route path="/messages" element={<MessagesPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
 
     </div>

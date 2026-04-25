@@ -1,11 +1,20 @@
-import React from 'react';
-import { Search, MapPin, Bell, MessageSquare, User } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Search, MapPin, Bell, MessageSquare, User, LogOut, UserCircle } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { logoutUser } from '../../services/authService';
 
 const DashboardNavbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  
   const isBookingsPage = location.pathname === '/bookings';
   const isReportsPage = location.pathname === '/reports';
+
+  const handleLogout = () => {
+    logoutUser();
+    navigate('/');
+  };
 
   return (
     <nav className="bg-white border-b border-gray-100 px-6 py-3 flex items-center justify-between sticky top-0 z-50">
@@ -30,18 +39,59 @@ const DashboardNavbar = () => {
         </div>
         
         <div className="flex items-center gap-4">
-          <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors">
+          <Link 
+            to="/notifications" 
+            className={`p-2 rounded-xl transition-all relative ${location.pathname === '/notifications' ? 'bg-blue-50 text-[#0047FF]' : 'text-gray-400 hover:text-[#0047FF] hover:bg-gray-50'}`}
+          >
             <Bell className="w-5 h-5" />
-          </button>
-          <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors">
+            <div className="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white" />
+          </Link>
+          <Link 
+            to="/messages" 
+            className={`p-2 rounded-xl transition-all relative ${location.pathname === '/messages' ? 'bg-blue-50 text-[#0047FF]' : 'text-gray-400 hover:text-[#0047FF] hover:bg-gray-50'}`}
+          >
             <MessageSquare className="w-5 h-5" />
-          </button>
-          <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden border-2 border-white shadow-sm">
-            <img 
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
-              alt="User" 
-              className="w-full h-full object-cover"
-            />
+          </Link>
+          
+          <div className="relative">
+            <button 
+              onClick={() => setShowProfileMenu(!showProfileMenu)}
+              className={`flex items-center gap-2 p-1 rounded-2xl transition-all ${location.pathname === '/profile' || showProfileMenu ? 'bg-blue-50 border border-blue-100 shadow-sm' : 'hover:bg-gray-50'}`}
+            >
+              <div className="w-9 h-9 rounded-xl overflow-hidden border-2 border-white shadow-sm">
+                <img 
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80" 
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </button>
+
+            {showProfileMenu && (
+              <>
+                <div 
+                  className="fixed inset-0 z-40" 
+                  onClick={() => setShowProfileMenu(false)} 
+                />
+                <div className="absolute right-0 mt-3 w-56 bg-white rounded-3xl border border-gray-100 shadow-2xl shadow-blue-900/10 z-50 overflow-hidden py-2 animate-in fade-in zoom-in duration-200">
+                  <Link 
+                    to="/profile"
+                    onClick={() => setShowProfileMenu(false)}
+                    className="flex items-center gap-3 px-6 py-4 text-sm font-bold text-[#1E293B] hover:bg-gray-50 transition-all"
+                  >
+                    <UserCircle className="w-5 h-5 text-blue-500" />
+                    View Profile
+                  </Link>
+                  <button 
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-3 px-6 py-4 text-sm font-bold text-red-500 hover:bg-red-50 transition-all border-t border-gray-50"
+                  >
+                    <LogOut className="w-5 h-5" />
+                    Logout
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
