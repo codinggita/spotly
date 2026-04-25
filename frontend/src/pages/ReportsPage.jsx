@@ -13,7 +13,7 @@ const ReportsPage = () => {
 
   const stats = [
     { label: "Active Bookings", value: "124", icon: Calendar, trend: "+12%", color: "blue" },
-    { label: "Monthly Revenue", value: "₹14,250", icon: BarChart3, trend: "+8%", color: "green" },
+    { label: "Monthly Spent", value: "₹4,250", icon: BarChart3, trend: "+8%", color: "green" },
     { label: "Avg. Duration", value: "4.2 Hrs", icon: Clock, trend: null, color: "orange" },
     { label: "Unique Users", value: "892", icon: Users, trend: null, color: "purple" }
   ];
