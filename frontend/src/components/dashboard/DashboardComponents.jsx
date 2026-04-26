@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Search, MapPin, Bell, MessageSquare, User, LogOut, UserCircle } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { logoutUser } from '../../services/authService';
+import { logoutUser, getCurrentUser } from '../../services/authService';
 
 const DashboardNavbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const user = getCurrentUser();
   
   const isBookingsPage = location.pathname === '/bookings';
   const isReportsPage = location.pathname === '/reports';
@@ -16,27 +17,35 @@ const DashboardNavbar = () => {
     navigate('/');
   };
 
+  const getFirstLetter = (name) => {
+    return name ? name.charAt(0).toUpperCase() : 'U';
+  };
+
+  const isOwner = user?.role === 'owner';
+
   return (
     <nav className="bg-white border-b border-gray-100 px-6 py-3 flex items-center justify-between sticky top-0 z-50">
-      <Link to="/driver" className="flex items-center gap-2">
+      <Link to={isOwner ? "/owner" : "/driver"} className="flex items-center gap-2">
         <span className="text-2xl font-extrabold text-[#0047FF]">Spotly</span>
       </Link>
       
       <div className="flex items-center gap-8">
-        <div className="hidden md:flex items-center gap-6 text-sm font-bold text-[#1E293B]">
-          <Link 
-            to="/bookings" 
-            className={`transition-all pb-1 ${isBookingsPage ? 'text-[#0047FF] border-b-2 border-[#0047FF]' : 'text-gray-500 hover:text-[#0047FF]'}`}
-          >
-            Bookings
-          </Link>
-          <Link 
-            to="/reports" 
-            className={`transition-all pb-1 ${isReportsPage ? 'text-[#0047FF] border-b-2 border-[#0047FF]' : 'text-gray-500 hover:text-[#0047FF]'}`}
-          >
-            Reports
-          </Link>
-        </div>
+        {!isOwner && (
+          <div className="hidden md:flex items-center gap-6 text-sm font-bold text-[#1E293B]">
+            <Link 
+              to="/bookings" 
+              className={`transition-all pb-1 ${isBookingsPage ? 'text-[#0047FF] border-b-2 border-[#0047FF]' : 'text-gray-500 hover:text-[#0047FF]'}`}
+            >
+              Bookings
+            </Link>
+            <Link 
+              to="/reports" 
+              className={`transition-all pb-1 ${isReportsPage ? 'text-[#0047FF] border-b-2 border-[#0047FF]' : 'text-gray-500 hover:text-[#0047FF]'}`}
+            >
+              Reports
+            </Link>
+          </div>
+        )}
         
         <div className="flex items-center gap-4">
           <Link 
@@ -46,24 +55,31 @@ const DashboardNavbar = () => {
             <Bell className="w-5 h-5" />
             <div className="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white" />
           </Link>
-          <Link 
-            to="/messages" 
-            className={`p-2 rounded-xl transition-all relative ${location.pathname === '/messages' ? 'bg-blue-50 text-[#0047FF]' : 'text-gray-400 hover:text-[#0047FF] hover:bg-gray-50'}`}
-          >
-            <MessageSquare className="w-5 h-5" />
-          </Link>
+
+          {!isOwner && (
+            <Link 
+              to="/messages" 
+              className={`p-2 rounded-xl transition-all relative ${location.pathname === '/messages' ? 'bg-blue-50 text-[#0047FF]' : 'text-gray-400 hover:text-[#0047FF] hover:bg-gray-50'}`}
+            >
+              <MessageSquare className="w-5 h-5" />
+            </Link>
+          )}
           
           <div className="relative">
             <button 
               onClick={() => setShowProfileMenu(!showProfileMenu)}
               className={`flex items-center gap-2 p-1 rounded-2xl transition-all ${location.pathname === '/profile' || showProfileMenu ? 'bg-blue-50 border border-blue-100 shadow-sm' : 'hover:bg-gray-50'}`}
             >
-              <div className="w-9 h-9 rounded-xl overflow-hidden border-2 border-white shadow-sm">
-                <img 
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80" 
-                  alt="Profile"
-                  className="w-full h-full object-cover"
-                />
+              <div className="w-9 h-9 rounded-xl overflow-hidden border-2 border-white shadow-sm bg-[#0047FF] flex items-center justify-center text-white font-bold text-sm">
+                {user?.avatar ? (
+                  <img 
+                    src={user.avatar} 
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  getFirstLetter(user?.fullName)
+                )}
               </div>
             </button>
 

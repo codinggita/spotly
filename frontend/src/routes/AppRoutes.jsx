@@ -15,10 +15,9 @@ import ReportsPage from '../pages/ReportsPage';
 import NotificationsPage from '../pages/NotificationsPage';
 import MessagesPage from '../pages/MessagesPage';
 import ProfilePage from '../pages/ProfilePage';
-
+import OwnerDashboard from '../pages/owner/OwnerDashboard';
 
 // Placeholder components
-const OwnerDashboard = () => <div className="p-10 text-center">Owner Dashboard</div>;
 
 const AppRoutes = () => {
   return (

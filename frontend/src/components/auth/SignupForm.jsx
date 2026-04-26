@@ -36,12 +36,17 @@ const SignupForm = ({ type = 'driver', hideSocial = false }) => {
     }
 
     try {
-      await registerUser({
+      const data = await registerUser({
         fullName: formData.fullName,
         email: formData.email,
         password: formData.password,
         role: formData.role
       });
+
+      if (data.token) {
+        localStorage.setItem('spotly_token', data.token);
+        localStorage.setItem('spotly_user', JSON.stringify(data.user));
+      }
       
       // Redirect based on role
       navigate(formData.role === 'driver' ? '/driver' : '/owner');
