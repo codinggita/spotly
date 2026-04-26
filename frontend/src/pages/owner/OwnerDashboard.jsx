@@ -12,13 +12,13 @@ import { getCurrentUser } from '../../services/authService';
 const OwnerDashboard = () => {
   const user = getCurrentUser();
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      <OwnerSidebar />
+    <div className="flex h-screen bg-[#F8FAFC] overflow-hidden">
+      <OwnerSidebar activePage="dashboard" />
       
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-w-0">
         <OwnerHeader />
         
-        <main className="flex-1 p-8">
+        <main className="flex-1 overflow-y-auto p-4 md:p-8">
           <div className="max-w-[1400px] mx-auto space-y-8">
             {/* Page Title & Actions */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">

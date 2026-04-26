@@ -16,6 +16,7 @@ import NotificationsPage from '../pages/NotificationsPage';
 import MessagesPage from '../pages/MessagesPage';
 import ProfilePage from '../pages/ProfilePage';
 import OwnerDashboard from '../pages/owner/OwnerDashboard';
+import MyParking from '../pages/owner/MyParking';
 
 // Placeholder components
 
@@ -33,6 +34,7 @@ const AppRoutes = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/driver" element={<DriverDashboard />} />
         <Route path="/owner" element={<OwnerDashboard />} />
+        <Route path="/owner/parking" element={<MyParking />} />
         <Route path="/parking/:id" element={<ParkingDetailsPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/bookings" element={<BookingDetailsPage />} />

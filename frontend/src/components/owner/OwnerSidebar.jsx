@@ -1,5 +1,4 @@
-import React from 'react';
-import { LayoutDashboard, Car, PlusCircle, BookOpen, HelpCircle, LogOut } from 'lucide-react';
+import { LayoutDashboard, ParkingCircle, PlusCircle, Calendar, HelpCircle, LogOut } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { logoutUser } from '../../services/authService';
 
@@ -9,9 +8,9 @@ const OwnerSidebar = () => {
   
   const menuItems = [
     { icon: LayoutDashboard, label: 'Dashboard', path: '/owner' },
-    { icon: Car, label: 'My Parking', path: '/owner/parking' },
+    { icon: ParkingCircle, label: 'My Parking', path: '/owner/parking' },
     { icon: PlusCircle, label: 'Add Parking', path: '/owner/add-parking' },
-    { icon: BookOpen, label: 'Bookings', path: '/owner/bookings' },
+    { icon: Calendar, label: 'Bookings', path: '/owner/bookings' },
   ];
 
   const handleLogout = () => {
@@ -34,12 +33,15 @@ const OwnerSidebar = () => {
             <Link
               key={item.label}
               to={item.path}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all relative ${
                 isActive 
-                  ? 'bg-blue-50 text-[#0047FF] border-r-4 border-[#0047FF] rounded-r-none' 
+                  ? 'bg-blue-50 text-[#0047FF]' 
                   : 'text-gray-500 hover:bg-gray-50 hover:text-[#0047FF]'
               }`}
             >
+              {isActive && (
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-[#0047FF] rounded-r-full" />
+              )}
               <item.icon className={`w-5 h-5 ${isActive ? 'text-[#0047FF]' : 'text-gray-400'}`} />
               {item.label}
             </Link>
