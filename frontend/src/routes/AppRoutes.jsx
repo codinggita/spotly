@@ -17,6 +17,7 @@ import MessagesPage from '../pages/MessagesPage';
 import ProfilePage from '../pages/ProfilePage';
 import OwnerDashboard from '../pages/owner/OwnerDashboard';
 import MyParking from '../pages/owner/MyParking';
+import AddParking from '../pages/owner/AddParking';
 
 // Placeholder components
 
@@ -35,6 +36,7 @@ const AppRoutes = () => {
         <Route path="/driver" element={<DriverDashboard />} />
         <Route path="/owner" element={<OwnerDashboard />} />
         <Route path="/owner/parking" element={<MyParking />} />
+        <Route path="/owner/add-parking" element={<AddParking />} />
         <Route path="/parking/:id" element={<ParkingDetailsPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/bookings" element={<BookingDetailsPage />} />
