@@ -33,7 +33,8 @@ const ParkingDetailsPage = () => {
     // For now, we fetch all and find by ID or use fallback
     const fetchSpot = async () => {
       try {
-        const response = await fetch('/api/parking');
+        const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001/api';
+        const response = await fetch(`${baseUrl}/parking`);
         const result = await response.json();
         const spot = result.data.find(s => s._id === id || s.id === parseInt(id));
         setParkingSpot(spot || result.data[0]);
