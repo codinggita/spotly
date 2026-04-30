@@ -1,4 +1,4 @@
-const API_URL = '/api/parking';
+const API_URL = import.meta.env.VITE_API_BASE_URL ? `${import.meta.env.VITE_API_BASE_URL}/parking` : 'http://localhost:5001/api/parking';
 
 export const getParkingSpots = async () => {
   try {

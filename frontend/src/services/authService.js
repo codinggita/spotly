@@ -1,4 +1,4 @@
-const API_URL = '/api/auth';
+const API_URL = import.meta.env.VITE_API_BASE_URL ? `${import.meta.env.VITE_API_BASE_URL}/auth` : 'http://localhost:5001/api/auth';
 
 export const registerUser = async (userData) => {
   try {
