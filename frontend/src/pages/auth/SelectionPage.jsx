@@ -1,9 +1,9 @@
 import React from 'react';
-import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
-import SelectionHero from '../components/selection/SelectionHero';
-import SelectionCards from '../components/selection/SelectionCards';
-import SelectionTrustBadges from '../components/selection/SelectionTrustBadges';
+import Navbar from '../../components/layout/Navbar';
+import Footer from '../../components/layout/Footer';
+import SelectionHero from '../../components/auth/SelectionHero';
+import SelectionCards from '../../components/auth/SelectionCards';
+import SelectionTrustBadges from '../../components/auth/SelectionTrustBadges';
 
 const SelectionPage = () => {
   return (

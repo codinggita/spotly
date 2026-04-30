@@ -4,8 +4,8 @@ import {
   Trash2, MoreHorizontal, Settings,
   Clock, MapPin, Calendar
 } from 'lucide-react';
-import { DashboardNavbar } from '../components/dashboard/DashboardComponents';
-import Footer from '../components/layout/Footer';
+import { DashboardNavbar } from '../../components/dashboard/DashboardComponents';
+import Footer from '../../components/layout/Footer';
 
 const NotificationsPage = () => {
   const [filter, setFilter] = useState('All');

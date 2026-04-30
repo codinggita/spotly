@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Compass, MapPin } from 'lucide-react';
-import ParkingCard, { DashboardNavbar } from '../components/dashboard/DashboardComponents';
-import ParkingMap from '../components/dashboard/ParkingMap';
-import { getParkingSpots } from '../services/parkingService';
-import Footer from '../components/layout/Footer';
+import ParkingCard, { DashboardNavbar } from '../../components/dashboard/DashboardComponents';
+import ParkingMap from '../../components/dashboard/ParkingMap';
+import { getParkingSpots } from '../../services/parkingService';
+import Footer from '../../components/layout/Footer';
 
 const DriverDashboard = () => {
   const [parkingSpots, setParkingSpots] = useState([]);

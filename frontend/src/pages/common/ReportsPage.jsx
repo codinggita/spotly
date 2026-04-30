@@ -5,8 +5,8 @@ import {
   ChevronLeft, ChevronRight, TrendingUp,
   MapPin
 } from 'lucide-react';
-import { DashboardNavbar } from '../components/dashboard/DashboardComponents';
-import Footer from '../components/layout/Footer';
+import { DashboardNavbar } from '../../components/dashboard/DashboardComponents';
+import Footer from '../../components/layout/Footer';
 
 const ReportsPage = () => {
   const [activeTab, setActiveTab] = useState('All Bookings');

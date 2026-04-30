@@ -5,10 +5,10 @@ import {
   ChevronRight, Camera, LogOut,
   Edit3, Verified, Star
 } from 'lucide-react';
-import { DashboardNavbar } from '../components/dashboard/DashboardComponents';
-import Footer from '../components/layout/Footer';
+import { DashboardNavbar } from '../../components/dashboard/DashboardComponents';
+import Footer from '../../components/layout/Footer';
 
-import { getCurrentUser, logoutUser } from '../services/authService';
+import { getCurrentUser, logoutUser } from '../../services/authService';
 import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {

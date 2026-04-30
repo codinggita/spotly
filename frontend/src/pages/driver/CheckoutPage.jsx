@@ -5,8 +5,8 @@ import {
   Shield, Clock, Lock, ArrowRight, CheckCircle2,
   Settings, Bell, MessageSquare
 } from 'lucide-react';
-import { DashboardNavbar } from '../components/dashboard/DashboardComponents';
-import Footer from '../components/layout/Footer';
+import { DashboardNavbar } from '../../components/dashboard/DashboardComponents';
+import Footer from '../../components/layout/Footer';
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
