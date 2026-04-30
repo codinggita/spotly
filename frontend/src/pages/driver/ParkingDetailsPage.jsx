@@ -33,7 +33,7 @@ const ParkingDetailsPage = () => {
     // For now, we fetch all and find by ID or use fallback
     const fetchSpot = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/parking');
+        const response = await fetch('/api/parking');
         const result = await response.json();
         const spot = result.data.find(s => s._id === id || s.id === parseInt(id));
         setParkingSpot(spot || result.data[0]);
