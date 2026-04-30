@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginUser } from '../services/authService';
-import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
+import { loginUser } from '../../services/authService';
+import Navbar from '../../components/layout/Navbar';
+import Footer from '../../components/layout/Footer';
 import { Mail, Lock, Eye, EyeOff, LayoutDashboard } from 'lucide-react';
-import SocialAuth from '../components/auth/SocialAuth';
+import SocialAuth from '../../components/auth/SocialAuth';
 
 const LoginPage = () => {
   const navigate = useNavigate();

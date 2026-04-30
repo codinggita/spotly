@@ -5,8 +5,8 @@ import {
   Navigation, Info, CheckCircle, Car, 
   ChevronRight, Calendar, User, Settings, Bell
 } from 'lucide-react';
-import { DashboardNavbar } from '../components/dashboard/DashboardComponents';
-import Footer from '../components/layout/Footer';
+import { DashboardNavbar } from '../../components/dashboard/DashboardComponents';
+import Footer from '../../components/layout/Footer';
 
 const ParkingDetailsPage = () => {
   const { id } = useParams();

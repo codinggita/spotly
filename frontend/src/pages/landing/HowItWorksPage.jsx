@@ -1,9 +1,9 @@
 import React from 'react';
-import Navbar from '../components/layout/Navbar';
-import StepsSection from '../components/howitworks/StepsSection';
-import HowItWorksCTA from '../components/howitworks/HowItWorksCTA';
-import FAQSection from '../components/howitworks/FAQSection';
-import Footer from '../components/layout/Footer';
+import Navbar from '../../components/layout/Navbar';
+import StepsSection from '../../components/landing/StepsSection';
+import HowItWorksCTA from '../../components/landing/HowItWorksCTA';
+import FAQSection from '../../components/landing/FAQSection';
+import Footer from '../../components/layout/Footer';
 
 const HowItWorksPage = () => {
   return (

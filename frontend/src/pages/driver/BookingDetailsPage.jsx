@@ -4,8 +4,8 @@ import {
   ShieldCheck, AlertCircle, ChevronRight,
   Car, CreditCard, Calendar
 } from 'lucide-react';
-import { DashboardNavbar } from '../components/dashboard/DashboardComponents';
-import Footer from '../components/layout/Footer';
+import { DashboardNavbar } from '../../components/dashboard/DashboardComponents';
+import Footer from '../../components/layout/Footer';
 
 const BookingDetailsPage = () => {
   return (

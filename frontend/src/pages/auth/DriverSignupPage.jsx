@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '../components/layout/Navbar';
-import AuthLeftPanel from '../components/auth/AuthLeftPanel';
-import SignupForm from '../components/auth/SignupForm';
+import Navbar from '../../components/layout/Navbar';
+import AuthLeftPanel from '../../components/auth/AuthLeftPanel';
+import SignupForm from '../../components/auth/SignupForm';
 const DriverSignupPage = () => {
   return (
     <div className="h-screen overflow-hidden flex flex-col bg-white">

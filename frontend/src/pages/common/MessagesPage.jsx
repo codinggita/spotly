@@ -4,8 +4,8 @@ import {
   Smile, Phone, Video, Info, Check, 
   CheckCheck, User, ShieldCheck
 } from 'lucide-react';
-import { DashboardNavbar } from '../components/dashboard/DashboardComponents';
-import Footer from '../components/layout/Footer';
+import { DashboardNavbar } from '../../components/dashboard/DashboardComponents';
+import Footer from '../../components/layout/Footer';
 
 const MessagesPage = () => {
   const [selectedChat, setSelectedChat] = useState(1);

@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from '../components/layout/Navbar';
-import SignupForm from '../components/auth/SignupForm';
+import Navbar from '../../components/layout/Navbar';
+import SignupForm from '../../components/auth/SignupForm';
 import { ShieldCheck, IndianRupee, Shield } from 'lucide-react';
 
 const OwnerSignupPage = () => {
