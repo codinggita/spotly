@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5001/api/parking';
+const API_URL = '/api/parking';
 
 export const getParkingSpots = async () => {
   try {
