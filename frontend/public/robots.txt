@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /driver/
+Disallow: /owner/
+Disallow: /checkout
+Disallow: /bookings
+
+Sitemap: https://spotly-j3k4.onrender.com/sitemap.xml
