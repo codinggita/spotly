@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="frontend/public/spotly-logo.png" alt="Spotly Logo" width="120" />
   
   # Spotly
   ### *Find & Share Parking Easily*
